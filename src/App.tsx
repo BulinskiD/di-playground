@@ -1,5 +1,5 @@
 import { BrowserRouter, Route } from "react-router-dom";
-import { Page1 } from "./Page1";
+import { Page1WithRouter } from "./Page1";
 import { Page2 } from "./Page2";
 import { Page3 } from "./Page3";
 
@@ -8,8 +8,8 @@ function App() {
     <>
       <h1>Playground :)</h1>
       <BrowserRouter>
-        <Route path="/page1">
-          <Page1 />
+        <Route exact path="/">
+          <Page1WithRouter />
         </Route>
         <Route path="/page2">
           <Page2 />
