@@ -1,8 +1,12 @@
+import { CounterContextProvider } from "./CounterContext";
+import { Counter } from "./Counter";
+
 function App() {
   return (
-    <h1>
-      Playground :)
-    </h1>
+    <CounterContextProvider>
+      <h1>Playground :)</h1>
+      <Counter />
+    </CounterContextProvider>
   );
 }
 
