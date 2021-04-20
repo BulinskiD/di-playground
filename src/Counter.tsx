@@ -5,11 +5,11 @@ export function Counter() {
 
   return (
     <div>
-      <button type="button" onClick={decrement}>
+      <button aria-label="decrement" type="button" onClick={decrement}>
         -
       </button>
       {counter}
-      <button type="button" onClick={increment}>
+      <button aria-label="increment" type="button" onClick={increment}>
         +
       </button>
     </div>
