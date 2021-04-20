@@ -8,7 +8,7 @@ function App() {
     <>
       <h1>Playground :)</h1>
       <BrowserRouter>
-        <Route path="/">
+        <Route exact path="/">
           <Page1 />
         </Route>
         <Route path="/page2">
