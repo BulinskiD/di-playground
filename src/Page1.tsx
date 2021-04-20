@@ -1,17 +1,21 @@
 import { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 
+interface FormElements extends HTMLFormControlsCollection {
+  number1: HTMLInputElement;
+  number2: HTMLInputElement;
+}
+interface PageForm extends HTMLFormElement {
+  readonly elements: FormElements;
+}
+
 export function Page1() {
   const history = useHistory();
   const [result, setResult] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<PageForm>) => {
     event.preventDefault();
-    const { number1, number2 } = (event.target as unknown) as {
-      number1: HTMLInputElement;
-      number2: HTMLInputElement;
-    };
-
+    const { number1, number2 } = event.currentTarget.elements;
     const result = Number(number1.value) + Number(number2.value);
 
     switch (result) {
