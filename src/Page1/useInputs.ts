@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import * as React from "react";
 import { useHistory } from "react-router-dom";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -9,11 +9,18 @@ interface PageForm extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
-export function Page1() {
-  const history = useHistory();
-  const [result, setResult] = useState("");
+// This is the contract between Page1 comp and useInputs. IMO it is not necessary to write it explicitly,
+// except some specific situations (e.g. if this hook was a lib)
+type UseInputs = () => {
+  handleSubmit: (event: React.FormEvent<PageForm>) => void;
+  result: string;
+};
 
-  const handleSubmit = (event: FormEvent<PageForm>) => {
+export const useInputs: UseInputs = () => {
+  const history = useHistory();
+  const [result, setResult] = React.useState("");
+
+  const handleSubmit = (event: React.FormEvent<PageForm>) => {
     event.preventDefault();
     const { number1, number2 } = event.currentTarget.elements;
     const result = Number(number1.value) + Number(number2.value);
@@ -28,22 +35,5 @@ export function Page1() {
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>{result}</div>
-      <div>
-        <label>
-          Number 1
-          <input type="number" name="number1" />
-        </label>
-      </div>
-      <div>
-        <label>
-          Number 2
-          <input type="number" name="number2" />
-        </label>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  );
-}
+  return { handleSubmit, result };
+};
