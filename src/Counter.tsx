@@ -1,23 +1,28 @@
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { StoreState } from "./store";
 import { counterActions } from "./store/counterSlice";
-import { Action } from "redux";
 
-export function Counter() {
-  const dispatch = useDispatch();
-  const counter = useSelector((state: StoreState) => state.counter);
+interface CounterProps {
+  counter: number;
+  decrement: () => void;
+  increment: () => void;
+}
 
-  const withDispatch = (action: () => Action) => () => dispatch(action());
-
+export function Counter({ counter, decrement, increment }: CounterProps) {
   return (
     <div>
-      <button type="button" onClick={withDispatch(counterActions.decrement)}>
+      <button type="button" aria-label="decrement" onClick={() => decrement()}>
         -
       </button>
       {counter}
-      <button type="button" onClick={withDispatch(counterActions.increment)}>
+      <button type="button" aria-label="increment" onClick={() => increment()}>
         +
       </button>
     </div>
   );
 }
+
+export const ConnectedCounter = connect(
+  (state: StoreState) => ({ counter: state.counter }),
+  { decrement: counterActions.decrement, increment: counterActions.increment }
+)(Counter);
