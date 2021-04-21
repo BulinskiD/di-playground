@@ -1,17 +1,17 @@
-import { useCounterContext } from "./CounterContext";
+import { WithContextProps, withCounter } from "./CounterContext";
 
-export function Counter() {
-  const { counter, decrement, increment } = useCounterContext();
-
+export function Counter({ increment, counter, decrement }: WithContextProps) {
   return (
     <div>
-      <button type="button" onClick={decrement}>
+      <button aria-label="decrement" type="button" onClick={decrement}>
         -
       </button>
       {counter}
-      <button type="button" onClick={increment}>
+      <button aria-label="increment" type="button" onClick={increment}>
         +
       </button>
     </div>
   );
 }
+
+export const CounterWithContext = withCounter(Counter);
