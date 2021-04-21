@@ -11,11 +11,19 @@ export function Counter() {
 
   return (
     <div>
-      <button type="button" onClick={withDispatch(counterActions.decrement)}>
+      <button
+        type="button"
+        aria-label="decrement"
+        onClick={withDispatch(counterActions.decrement)}
+      >
         -
       </button>
       {counter}
-      <button type="button" onClick={withDispatch(counterActions.increment)}>
+      <button
+        type="button"
+        aria-label="increment"
+        onClick={withDispatch(counterActions.increment)}
+      >
         +
       </button>
     </div>
