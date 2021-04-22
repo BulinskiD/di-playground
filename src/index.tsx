@@ -2,6 +2,9 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {worker} from "./testApi/worker";
+
+worker.start();
 
 ReactDOM.render(
   <React.StrictMode>
