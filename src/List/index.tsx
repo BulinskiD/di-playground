@@ -1,10 +1,14 @@
 import { useFetchList } from "./useFetchList";
 
 export function List() {
-  const { data, isLoading } = useFetchList();
+  const { data, isLoading, error } = useFetchList();
 
   if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
   }
 
   return (

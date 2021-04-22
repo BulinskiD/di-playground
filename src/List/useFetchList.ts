@@ -7,8 +7,12 @@ const fetchList = () => axios.get<ListItem[]>("/list").then(({ data }) => data);
 export function useFetchList(): {
   data: ListItem[] | undefined;
   isLoading: boolean;
+  error: null | Error;
 } {
-  const { data, isLoading } = useQuery("list", fetchList);
+  const { data, isLoading, error } = useQuery<unknown, Error, ListItem[]>(
+    "list",
+    fetchList
+  );
 
-  return { data, isLoading };
+  return { data, isLoading, error };
 }
